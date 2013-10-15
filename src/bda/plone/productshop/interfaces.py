@@ -62,10 +62,12 @@ class IShopTabsSettings(form.Schema):
             ],
         )
 
-    rtf_fields = schema.Set(
+    rtf_fields = schema.Choice(
                         title=_(u"Render which (rtf) fields as Tabs"),
-                        value_type=schema.Choice(values=[('Datasheet'), ('Details')])
+                        vocabulary='bda.plone.productshop.RtfFieldsVocabulary'
                         )
+
+
 
 
 alsoProvides(IShopTabsSettings, IShopSettingsProvider)

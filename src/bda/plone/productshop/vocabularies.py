@@ -10,6 +10,12 @@ from .utils import (
     available_variant_aspects,
 )
 
+#added by espen
+from zope.component import getUtility
+from plone.registry.interfaces import IRegistry
+from bda.plone.productshop.interfaces import IShopTabsSettings
+
+
 
 _ = MessageFactory('bda.plone.productshop')
 
@@ -23,3 +29,15 @@ def AvailableVariantAspectsVocabulary(context):
 
 
 directlyProvides(AvailableVariantAspectsVocabulary, IVocabularyFactory)
+
+
+
+def RtfFieldsVocabulary(context):
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(IShopTabsSettings)
+    terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in settings]
+    return SimpleVocabulary(terms)
+
+
+directlyProvides(RtfFieldsVocabulary, IVocabularyFactory)
+

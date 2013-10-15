@@ -21,6 +21,10 @@
     component=".vocabularies.AvailableVariantAspectsVocabulary"
     name="bda.plone.productshop.AvailableVariantAspectsVocabulary" />
 
+  <utility
+    component=".vocabularies.RtfFieldsVocabulary"
+    name="bda.plone.productshop.RtfFieldsVocabulary" />
+
   <!-- DX behaviors -->
   <plone:behavior
     title="Exclude From navigation for products"
