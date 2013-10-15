@@ -1,0 +1,100 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:five="http://namespaces.zope.org/five"
+           xmlns:plone="http://namespaces.plone.org/plone"
+           xmlns:i18n="http://namespaces.zope.org/i18n"
+           i18n_domain="bda.plone.productshop">
+
+  <i18n:registerTranslations directory="locales" />
+
+  <include package="plone.app.dexterity" />
+  <include package="plone.app.relationfield" />
+  <include package="bda.plone.shop" />
+  <include package="collective.instancebehavior" />
+
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <include package=".browser" />
+  <include file="profiles.zcml" />
+
+  <!-- vocabularies -->
+  <utility
+    component=".vocabularies.AvailableVariantAspectsVocabulary"
+    name="bda.plone.productshop.AvailableVariantAspectsVocabulary" />
+
+  <!-- DX behaviors -->
+  <plone:behavior
+    title="Exclude From navigation for products"
+    description="Allow products to be excluded from navigation"
+    provides=".behaviors.IProductExcludeFromNavigation"
+    for="plone.dexterity.interfaces.IDexterityContent" />
+
+  <plone:behavior
+    title="Product"
+    description="Extend content with product specific information."
+    provides=".behaviors.IProductBehavior"
+    for="plone.dexterity.interfaces.IDexterityContent" />
+
+  <plone:behavior
+    title="Product group"
+    description="Extend content with product specific information."
+    provides=".behaviors.IProductGroupBehavior"
+    for="plone.dexterity.interfaces.IDexterityContent" />
+
+  <plone:behavior
+    title="Variant"
+    description="Extend content being a variant."
+    provides=".behaviors.IVariantBehavior"
+    for="plone.dexterity.interfaces.IDexterityContent" />
+
+  <plone:behavior
+    title="Color"
+    description="Extend content with product color variant."
+    provides=".behaviors.IColorBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Weight"
+    description="Extend content with product weight."
+    provides=".behaviors.IWeightBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Size"
+    description="Extend content with product size."
+    provides=".behaviors.ISizeBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Demand"
+    description="Extend content with product demand."
+    provides=".behaviors.IDemandBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Length"
+    description="Extend content with product length."
+    provides=".behaviors.ILengthBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Width"
+    description="Extend content with product width."
+    provides=".behaviors.IWidthBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <plone:behavior
+    title="Height"
+    description="Extend content with product height."
+    provides=".behaviors.IHeightBehavior"
+    for="collective.instancebehavior.IInstanceBehaviorAssignableContent" />
+
+  <!-- indexing -->
+  <adapter name="color_aspect" factory=".indexer.color_aspect" />
+  <adapter name="weight_aspect" factory=".indexer.weight_aspect" />
+  <adapter name="size_aspect" factory=".indexer.size_aspect" />
+  <adapter name="demand_aspect" factory=".indexer.demand_aspect" />
+  <adapter name="length_aspect" factory=".indexer.length_aspect" />
+  <adapter name="width_aspect" factory=".indexer.width_aspect" />
+  <adapter name="height_aspect" factory=".indexer.height_aspect" />
+
+</configure>
