@@ -21,6 +21,9 @@ from ..utils import (
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
 from bda.plone.productshop.interfaces import IShopTabsSettings
+from plone.dexterity.utils import iterSchemata
+from zope.schema import getFields
+from plone.dexterity.interfaces import IDexterityContent
 
 
 _ = MessageFactory('bda.plone.productshop')
@@ -62,15 +65,28 @@ class ProductView(BrowserView):
     	settings = registry.forInterface(IShopTabsSettings)
     	return settings.rtf_fields
 
-    @property
-    def details(self):
-    	if "Details" in self.rtf_fields:
-        	return self.context.details
+#   @property
+#    def details(self):
+#    	if "Details" in self.rtf_fields:
+#        	return self.context.details
+
+#    @property
+#    def datasheet(self):
+#        if "Datasheet" in self.rtf_fields:
+#        	return self.context.datasheet
 
     @property
-    def datasheet(self):
-        if "Datasheet" in self.rtf_fields:
-        	return self.context.datasheet
+    def all_rtf_fields(self):
+        richtext_fields = []
+        context=self.context
+        if IDexterityContent.providedBy(context):
+            for schemata in iterSchemata(context):
+                for name, field in getFields(schemata).items():
+                    #checking for rich text field
+                    #if isinstance(field, RichText):
+                    if str(field.__class__) == "<class 'plone.app.textfield.RichText'>":
+                        richtext_fields.append(name)
+        return richtext_fields
 
     @property
     def related_items(self):
