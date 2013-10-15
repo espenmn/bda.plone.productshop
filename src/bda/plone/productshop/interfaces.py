@@ -11,6 +11,7 @@ from zope import schema
 from zope.interface import alsoProvides
 from plone.directives import form
 from bda.plone.shop.interfaces import IShopSettingsProvider
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
 
 _ = MessageFactory('bda.plone.productshop')
 
@@ -55,19 +56,17 @@ class IShopTabsSettings(form.Schema):
     """
 
     form.fieldset(
-        'tabs',
-        label=_(u'TabsSettings'),
+        'productshop',
+        label=_(u'Productshop Settings'),
         fields=[
             'rtf_fields',
             ],
         )
 
-    rtf_fields = schema.Choice(
-                        title=_(u"Render which (rtf) fields as Tabs"),
-                        vocabulary='bda.plone.productshop.RtfFieldsVocabulary'
-                        )
-
-
+   
+    form.widget(rtf_fields=CheckBoxFieldWidget)
+    rtf_fields = schema.Choice(title=u"Available fields",  
+	vocabulary='bda.plone.productshop.RtfFieldsVocabulary')
 
 
 alsoProvides(IShopTabsSettings, IShopSettingsProvider)

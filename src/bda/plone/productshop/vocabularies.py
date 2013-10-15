@@ -12,10 +12,7 @@ from .utils import (
 
 #added by espen
 from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-from bda.plone.productshop.interfaces import IShopTabsSettings
-
-
+from plone.dexterity.interfaces import IDexterityFTI
 
 _ = MessageFactory('bda.plone.productshop')
 
@@ -33,11 +30,9 @@ directlyProvides(AvailableVariantAspectsVocabulary, IVocabularyFactory)
 
 
 def RtfFieldsVocabulary(context):
-    registry = getUtility(IRegistry)
-    settings = registry.forInterface(IShopTabsSettings)
-    terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in settings]
+    fields = getUtility(IDexterityFTI, name='bda.plone.productshop.product').lookupSchema()
+    terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
     return SimpleVocabulary(terms)
-
 
 directlyProvides(RtfFieldsVocabulary, IVocabularyFactory)
 
