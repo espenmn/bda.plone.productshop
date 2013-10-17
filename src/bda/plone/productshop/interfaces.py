@@ -65,8 +65,9 @@ class IShopTabsSettings(form.Schema):
 
    
     form.widget(rtf_fields=CheckBoxFieldWidget)
-    rtf_fields = schema.Choice(title=u"Available fields",  
-	vocabulary='bda.plone.productshop.RtfFieldsVocabulary')
+    rtf_fields = schema.List(title=u"Available fields",
+        value_type=schema.Choice(source='bda.plone.productshop.RtfFieldsVocabulary')
+    )
 
 
 alsoProvides(IShopTabsSettings, IShopSettingsProvider)
