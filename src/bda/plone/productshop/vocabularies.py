@@ -13,6 +13,7 @@ from .utils import (
 #added by espen
 from zope.component import getUtility
 from plone.dexterity.interfaces import IDexterityFTI
+from zope.component import ComponentLookupError
 
 _ = MessageFactory('bda.plone.productshop')
 
