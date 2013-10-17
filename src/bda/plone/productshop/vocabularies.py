@@ -35,6 +35,8 @@ def RtfFieldsVocabulary(context):
         fields = type.lookupSchema()
         terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
         return SimpleVocabulary(terms)
+    except KeyError:
+        pass
     finally:
         pass
 
