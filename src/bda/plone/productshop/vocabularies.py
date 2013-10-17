@@ -34,6 +34,8 @@ def RtfFieldsVocabulary(context):
         fields = getUtility(IDexterityFTI, name='bda.plone.productshop.product').lookupSchema()
         terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
         return SimpleVocabulary(terms)
+    finally:
+        pass
 
 directlyProvides(RtfFieldsVocabulary, IVocabularyFactory)
 
