@@ -31,9 +31,10 @@ directlyProvides(AvailableVariantAspectsVocabulary, IVocabularyFactory)
 
 def RtfFieldsVocabulary(context):
     try:
-        fields = getUtility(IDexterityFTI, name='bda.plone.productshop.product').lookupSchema()
+        fields = list(getUtility(IDexterityFTI, name='bda.plone.productshop.product').lookupSchema())
     except:
-        fields = ['Datasheet', ]
+        pass
+    fields += ('datasheet', 'details')
     terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
     return SimpleVocabulary(terms)
 

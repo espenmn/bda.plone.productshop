@@ -84,8 +84,8 @@ class ProductView(BrowserView):
                 for name, field in getFields(schemata).items():
                     #checking for rich text field
                     #if isinstance(field, RichText):
-                    if str(field.__class__) == "<class 'plone.app.textfield.RichText'>":
-                        richtext_fields.append(name)
+                    if str(field.__class__) == "<class 'plone.app.textfield.RichText'>" and name in self.rtf_fields:
+                            richtext_fields.append(name)
         return richtext_fields
 
     @property

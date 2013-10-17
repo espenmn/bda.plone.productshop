@@ -22,8 +22,7 @@
 
   <ul class="shopview_tabs">
     <tal:tabs tal:repeat="rtfield all_rtf_fields">
-      <li tal:define="fieldtitle rtfield/title"
-          tal:condition="python: fieldtitle in rtf_fields"> 
+      <li tal:define="fieldtitle rtfield/title"> 
         	<a href="#" tal:condition="context/?rtfield">
         		<span tal:replace="rtfield/title" />
         	</a>
@@ -37,8 +36,7 @@
          
   <div class="shopview_panes">
     <tal:rtfields tal:repeat="rtfield all_rtf_fields">
-        <tal:check  tal:define="fieldtitle rtfield/title"
-         			tal:condition="python: fieldtitle in rtf_fields"> 
+        <tal:check  tal:define="fieldtitle rtfield/title"> 
     		<div tal:condition="context/?rtfield" 
     	    	 tal:content="structure context/?rtfield/output" />
     	</tal:check>
