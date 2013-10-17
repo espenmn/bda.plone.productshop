@@ -13,7 +13,6 @@ from .utils import (
 #added by espen
 from zope.component import getUtility
 from plone.dexterity.interfaces import IDexterityFTI
-from zope.component import ComponentLookupError
 
 _ = MessageFactory('bda.plone.productshop')
 
@@ -32,14 +31,11 @@ directlyProvides(AvailableVariantAspectsVocabulary, IVocabularyFactory)
 
 def RtfFieldsVocabulary(context):
     try:
-        type = getUtility(IDexterityFTI, name='bda.plone.productshop.product')
-        fields = type.lookupSchema()
-        terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
-        return SimpleVocabulary(terms)
-    except KeyError:
-        pass
-    finally:
-        pass
+        fields = getUtility(IDexterityFTI, name='bda.plone.productshop.product').lookupSchema()
+    except:
+        fields = ['Datasheet', ]
+    terms = [ SimpleTerm(value=pair, token=pair, title=pair) for pair in fields]
+    return SimpleVocabulary(terms)
 
 directlyProvides(RtfFieldsVocabulary, IVocabularyFactory)
 
