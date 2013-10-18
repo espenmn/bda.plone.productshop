@@ -39,8 +39,10 @@ provideAdapter(ComputedWidgetAttribute(
     field=IProductExcludeFromNavigation['exclude_from_nav']),
     name='default')
 
-
-class IProductBehavior(model.Schema, IProduct):
+#Feel that it is wrong to inherit a content type as a behaviour
+#Also, it looks like it gives problems with TTW adding of fields
+#class IProductBehavior(model.Schema, IProduct):
+class IProductBehavior(model.Schema):
     """Product behavior.
     """
     item_number = schema.TextLine(
